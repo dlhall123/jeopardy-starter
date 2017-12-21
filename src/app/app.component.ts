@@ -10,6 +10,7 @@ export class AppComponent implements OnInit {
   title = 'app';
 
   questionInfo;
+  userScore: number = 0;
 
   constructor(private jeopardyService: JeopardyService){}
 
@@ -20,6 +21,15 @@ export class AppComponent implements OnInit {
           this.questionInfo = questionInfo[0];
         }
       )
+  }
+
+  evaluateAnswer(answer: string){
+    if (answer.toLowerCase() == this.questionInfo.answer.toLowerCase()){
+      this.userScore += this.questionInfo.value;
+    } else if (this.questionInfo.value <= this.userScore){
+      this.userScore -= this.questionInfo.value;
+    }
+    this.getDataFromService();
   }
 
   ngOnInit(){
