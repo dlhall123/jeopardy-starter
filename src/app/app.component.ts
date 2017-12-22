@@ -7,15 +7,14 @@ import { JeopardyService } from './jeopardy.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'app';
 
   questionInfo;
   categoryInfo;
   selectedCategory;
-  userScore: number = 0;
 
   constructor(private jeopardyService: JeopardyService) { }
 
+  //get a random number, pulls random number based on the length of questions from the service
   getRandomIntInclusive(min = 0, max) {
     if (max > 100) {
       max = 100;
@@ -25,6 +24,7 @@ export class AppComponent implements OnInit {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
+  //gets a question based on selected category 
   getQuestionDataFromService() {
     this.jeopardyService.getQuestionInfo(this.selectedCategory.id)
       .subscribe(
@@ -36,7 +36,9 @@ export class AppComponent implements OnInit {
 
   }
 
+  //gets categories from JeopardyService
   getCategoriesFromService() {
+    this.selectedCategory = null;
     this.jeopardyService.getCategories()
       .subscribe(
       categoryInfo => {
@@ -46,17 +48,7 @@ export class AppComponent implements OnInit {
 
   }
 
-
-  evaluateAnswer(answer: string) {
-      if (answer.toLowerCase() == this.questionInfo.answer.toLowerCase()) {
-        this.userScore += this.questionInfo.value;
-      } else if (this.questionInfo.value <= this.userScore) {
-        this.userScore -= this.questionInfo.value;
-      }
-      this.getCategoriesFromService();
-      this.selectedCategory = null;
-  }
-
+  //Method called when a category is selected
   clickedCategory(category) {
     this.selectedCategory = category;
     this.getQuestionDataFromService();

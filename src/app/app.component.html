@@ -5,13 +5,13 @@
     
     </ul>
 </div >
-<h2>Score: {{ userScore }}</h2>
+
 <div style="text-align:left" *ngIf='selectedCategory'>
 <h4>Point Value: {{ questionInfo?.value }}</h4>
 <h4>Category is: {{ questionInfo?.category.title }}</h4>
 <h4>Question is: {{ questionInfo?.question }}</h4>
- 
-<app-answer-handler (buttonClicked)="evaluateAnswer($event)"></app-answer-handler>
 </div>
+<app-answer-handler #answerHandler (buttonClicked)="getCategoriesFromService()" [questionInfo]="questionInfo" ></app-answer-handler>
+
 
 
