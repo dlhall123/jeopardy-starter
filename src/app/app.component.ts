@@ -53,6 +53,7 @@ export class AppComponent implements OnInit {
       } else if (this.questionInfo.value <= this.userScore) {
         this.userScore -= this.questionInfo.value;
       }
+      this.getCategoriesFromService();
       this.selectedCategory = null;
   }
 

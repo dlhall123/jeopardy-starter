@@ -6,13 +6,11 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import {JeopardyService } from './jeopardy.service';
 import { AnswerHandlerComponent } from './answer-handler/answer-handler.component';
-import { CategoryListComponent } from './category-list/category-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AnswerHandlerComponent,
-    CategoryListComponent
+    AnswerHandlerComponent
   ],
   imports: [
     BrowserModule,
