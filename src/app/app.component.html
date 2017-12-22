@@ -1,18 +1,15 @@
 <div *ngIf='!selectedCategory'>
-    <p>Categories</p>
+    <h2>Categories</h2>
     <ul>
-        <!-- <li  *ngFor='let category of categories' (click)='clickedCategory(category)'>{{ category?.title }}</li> -->
-        <li (click)='clickedCategory(7)'>US Cities</li>
-        <li (click)='clickedCategory(136)'>Stupid Answers</li>
-        <li (click)='clickedCategory(67)'>Television</li>
+        <li  *ngFor='let category of categoryInfo' (click)='clickedCategory(category)'>{{ category?.title }}</li>
 
     </ul>
 </div >
-<p>Score: {{ userScore }}</p>
+<h2>Score: {{ userScore }}</h2>
 <div style="text-align:left" *ngIf='selectedCategory'>
-<p>Point Value: {{ questionInfo?.value }}</p>
-<p>Category is: {{ questionInfo?.category.title }}</p>
-<p>Question is: {{ questionInfo?.question }}</p>
+<h4>Point Value: {{ questionInfo?.value }}</h4>
+<h4>Category is: {{ questionInfo?.category.title }}</h4>
+<h4>Question is: {{ questionInfo?.question }}</h4>
  
 <app-answer-handler (buttonClicked)="evaluateAnswer($event)"></app-answer-handler>
 </div>

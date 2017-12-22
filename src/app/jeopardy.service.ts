@@ -7,7 +7,8 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class JeopardyService {
 
-  private categoriesUrl: string = "http://jservice.io/api/categories"; 
+
+  private categoriesUrl: string = "http://jservice.io/api/categories?count=3&offset="; 
 
   //private questionUrl: string = "http://jservice.io/api/random";
 
@@ -24,14 +25,14 @@ export class JeopardyService {
 
   // }
 
-  // getCategories(): Observable<any> {
+  getCategories(): Observable<any> {
 
-  //   return this.http.get(this.categoriesUrl)
-  //     .map(result => {
-  //       return result.json()
-  //     })
+    return this.http.get(this.categoriesUrl + Math.round(Math.random()*100))
+      .map(result => {
+        return result.json()
+      })
 
-  // }
+  }
 
   getQuestionInfo(categoryId){
      return this.http.get(this.questionUrl + categoryId)

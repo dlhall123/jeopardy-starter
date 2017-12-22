@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {JeopardyService } from './jeopardy.service';
+import { JeopardyService } from './jeopardy.service';
 
 @Component({
   selector: 'app-root',
@@ -10,43 +10,60 @@ export class AppComponent implements OnInit {
   title = 'app';
 
   questionInfo;
-  categories;
+  categoryInfo;
   selectedCategory;
   userScore: number = 0;
 
-  constructor(private jeopardyService: JeopardyService){}
+  constructor(private jeopardyService: JeopardyService) { }
 
-  getQuestionDataFromService(){
-    this.jeopardyService.getQuestionInfo(this.selectedCategory)
-      .subscribe(
-        questionInfo => {
-          this.questionInfo = questionInfo[Math.round(Math.random()*100)];
-          console.log(this.questionInfo.answer);
-        }
-      )
-      
-  }
-
-
-  evaluateAnswer(answer : string){
-    if(answer != undefined){
-    if (answer.toLowerCase() == this.questionInfo.answer.toLowerCase()){
-      this.userScore += this.questionInfo.value;
-    } else if (this.questionInfo.value <= this.userScore){
-      this.userScore -= this.questionInfo.value;
+  getRandomIntInclusive(min = 0, max) {
+    if (max > 100) {
+      max = 100;
     }
-    this.selectedCategory=null;
-  } else{
-    alert("Please fill in answer");
-  }
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
-  clickedCategory(categoryId){
-    this.selectedCategory = categoryId;
+  getQuestionDataFromService() {
+    this.jeopardyService.getQuestionInfo(this.selectedCategory.id)
+      .subscribe(
+      questionInfo => {
+        this.questionInfo = questionInfo[this.getRandomIntInclusive(0, this.selectedCategory.clues_count - 1)];
+        console.log(this.questionInfo.answer);
+      }
+      )
+
+  }
+
+  getCategoriesFromService() {
+    this.jeopardyService.getCategories()
+      .subscribe(
+      categoryInfo => {
+        this.categoryInfo = categoryInfo;
+      }
+      )
+
+  }
+
+
+  evaluateAnswer(answer: string) {
+      if (answer.toLowerCase() == this.questionInfo.answer.toLowerCase()) {
+        this.userScore += this.questionInfo.value;
+      } else if (this.questionInfo.value <= this.userScore) {
+        this.userScore -= this.questionInfo.value;
+      }
+      this.selectedCategory = null;
+  }
+
+  clickedCategory(category) {
+    this.selectedCategory = category;
     this.getQuestionDataFromService();
   }
 
-  ngOnInit(){
+  ngOnInit() {
+    this.getCategoriesFromService();
+
   }
 
 }

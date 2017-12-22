@@ -13,9 +13,13 @@ export class AnswerHandlerComponent implements OnInit {
 
   @Output() buttonClicked = new EventEmitter();
 
-  evaluateAnswer(){
-    this.buttonClicked.emit(this.answer);
-    this.answer = "";
+  evaluateAnswer() {
+    if (this.answer != undefined && this.answer != "") {
+      this.buttonClicked.emit(this.answer);
+      this.answer = "";
+    } else {
+      alert("Please fill in answer");
+    }
   }
 
 
