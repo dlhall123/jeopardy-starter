@@ -7,17 +7,37 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class JeopardyService {
 
-  private baseUrl: string = "http://jservice.io/api/random";
+  private categoriesUrl: string = "http://jservice.io/api/categories"; 
+
+  //private questionUrl: string = "http://jservice.io/api/random";
+
+  private questionUrl: string = "http://jservice.io/api/clues?category=";
 
   constructor(private http: Http) { }
 
-  getQuestionInfo(): Observable<any> {
+  // getQuestionInfo(): Observable<any> {
 
-    return this.http.get(this.baseUrl)
-      .map(result => {
+  //   return this.http.get(this.questionUrl)
+  //     .map(result => {
+  //       return result.json()
+  //     })
+
+  // }
+
+  // getCategories(): Observable<any> {
+
+  //   return this.http.get(this.categoriesUrl)
+  //     .map(result => {
+  //       return result.json()
+  //     })
+
+  // }
+
+  getQuestionInfo(categoryId){
+     return this.http.get(this.questionUrl + categoryId)
+     .map(result => {
         return result.json()
-      })
-
+       })
   }
 
 
