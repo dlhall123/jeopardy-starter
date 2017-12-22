@@ -48,11 +48,11 @@ export class AppComponent implements OnInit {
 
   }
 
-  //Method called when a category is selected
-  clickedCategory(category) {
-    this.selectedCategory = category;
-    this.getQuestionDataFromService();
-  }
+      //Method called when a category is selected
+      clickedCategory(category) {
+        this.selectedCategory = category;
+        this.getQuestionDataFromService();
+      }
 
   ngOnInit() {
     this.getCategoriesFromService();

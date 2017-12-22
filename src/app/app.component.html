@@ -1,5 +1,5 @@
 <div *ngIf='!selectedCategory'>
-    <h2>Categories</h2>
+    <h2>Select a category:</h2>
     <ul>
         <li *ngFor='let category of categoryInfo' (click)='clickedCategory(category)'>{{ category?.title }}</li>
     
@@ -11,7 +11,7 @@
 <h4>Category is: {{ questionInfo?.category.title }}</h4>
 <h4>Question is: {{ questionInfo?.question }}</h4>
 </div>
-<app-answer-handler #answerHandler (buttonClicked)="getCategoriesFromService()" [questionInfo]="questionInfo" ></app-answer-handler>
+<app-answer-handler (buttonClicked)="getCategoriesFromService()" [questionInfo]="questionInfo" ></app-answer-handler>
 
 
 
