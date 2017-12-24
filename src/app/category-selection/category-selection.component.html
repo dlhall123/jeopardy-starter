@@ -1,0 +1,5 @@
+<h2>Select a category:</h2>
+<ul>
+  <li *ngFor='let category of categoryInfo' (click)='clickedCategory(category)'>{{ category?.title }}</li>
+
+</ul>

@@ -1,10 +1,6 @@
 <div *ngIf='!selectedCategory'>
-    <h2>Select a category:</h2>
-    <ul>
-        <li *ngFor='let category of categoryInfo' (click)='clickedCategory(category)'>{{ category?.title }}</li>
-    
-    </ul>
-</div >
+    <app-category-selection (categorySelected) = "getQuestionDataFromService($event)" [categoryInfo]="categoryInfo"></app-category-selection>
+</div>
 
 <div style="text-align:left" *ngIf='selectedCategory'>
 <h4>Point Value: {{ questionInfo?.value }}</h4>

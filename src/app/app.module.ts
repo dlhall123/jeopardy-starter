@@ -6,11 +6,13 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import {JeopardyService } from './jeopardy.service';
 import { AnswerHandlerComponent } from './answer-handler/answer-handler.component';
+import { CategorySelectionComponent } from './category-selection/category-selection.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AnswerHandlerComponent
+    AnswerHandlerComponent,
+    CategorySelectionComponent
   ],
   imports: [
     BrowserModule,

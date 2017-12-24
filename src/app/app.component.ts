@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
   constructor(private jeopardyService: JeopardyService) { }
 
   //get a random number, pulls random number based on the length of questions from the service
-  getRandomIntInclusive(min = 0, max) {
+  getRandomInt(min = 0, max) {
     if (max > 100) {
       max = 100;
     }
@@ -25,11 +25,12 @@ export class AppComponent implements OnInit {
   }
 
   //gets a question based on selected category 
-  getQuestionDataFromService() {
-    this.jeopardyService.getQuestionInfo(this.selectedCategory.id)
+  getQuestionDataFromService(selectedCategory) {
+    this.selectedCategory = true;
+    this.jeopardyService.getQuestionInfo(selectedCategory.id)
       .subscribe(
       questionInfo => {
-        this.questionInfo = questionInfo[this.getRandomIntInclusive(0, this.selectedCategory.clues_count - 1)];
+        this.questionInfo = questionInfo[this.getRandomInt(0, selectedCategory.clues_count - 1)];
         console.log(this.questionInfo.answer);
       }
       )
@@ -47,12 +48,6 @@ export class AppComponent implements OnInit {
       )
 
   }
-
-      //Method called when a category is selected
-      clickedCategory(category) {
-        this.selectedCategory = category;
-        this.getQuestionDataFromService();
-      }
 
   ngOnInit() {
     this.getCategoriesFromService();
